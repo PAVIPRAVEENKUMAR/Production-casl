@@ -32,7 +32,6 @@ export class CreateUserDto {
 
   @ApiProperty()
   @IsOptional()
-  @IsEnum(['user', 'admin']) 
   role?: string;
 }
 

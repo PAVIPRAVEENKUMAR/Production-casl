@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, UseGuards, Request } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards, Request, Req } from '@nestjs/common';
 import { AuthService } from '../auth/auth.service';
 import { CreateUserDto, Login } from './dto/user.dto';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody, ApiBearerAuth } from '@nestjs/swagger';
@@ -8,6 +8,7 @@ import { Action } from '../shared/enums/enums';
 import { Public } from '../shared/decorators/public.decorator';
 import { CaslBaseGuard } from '../authz/casl.base.guard';
 import { JwtAuthGuard } from '../auth/jwt.auth.guard';
+import { AuthenticatedRequest } from '../items/interfaces/auth.interface';
 
 @ApiTags('Users')
 @Controller('users')
@@ -45,7 +46,7 @@ export class UsersController {
   @ApiResponse({ status: 403, description: 'Forbidden - Permission denied' })
   @UseGuards(JwtAuthGuard, CaslBaseGuard)
   @SetPermissions(Action.Read, 'User')
-  async getProfile(@Request() req) {
+  async getProfile(@Request()req: AuthenticatedRequest) {
     return {
       message: 'Access granted to profile',
       user: req.user,
@@ -58,7 +59,7 @@ export class UsersController {
   @ApiResponse({ status: 200, description: 'Access granted to admin' })
   @ApiResponse({ status: 403, description: 'Forbidden - Permission denied' })
   @UseGuards(JwtAuthGuard, CaslBaseGuard)
-  @SetPermissions(Action.Manage, 'admin')
+  @SetPermissions(Action.Manage, 'all')
   async getAdmin(@Request() req) {
     return {
       message: 'Access granted to admin',

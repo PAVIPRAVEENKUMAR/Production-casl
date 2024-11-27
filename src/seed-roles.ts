@@ -9,12 +9,9 @@ async function seedRoles() {
 
   try {
 
-    const userRole = await rolesService.createRole('user', [
-      { action: 'read', subject: 'users', conditions: { userId: '$userId' } },
+    const userRole = await rolesService.createRole('visiter', [
+      { action: 'read', subject: 'users', conditions: { userId: '$userId' }},
       { action: 'read', subject: 'Items' },
-      { action: 'read', subject: 'Items' },
-      { action: 'update', subject: 'Items', conditions: { userId: '$userId' } },
-    { action: 'delete', subject: 'Items', conditions: { userId: '$userId' } },
     ]);
     console.log('User role seeded:', userRole);
   } catch (error) {
