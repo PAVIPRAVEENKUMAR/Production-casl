@@ -15,7 +15,7 @@ export class RolesService {
     const role = await this.roleModel.findOne({ name }).exec();
     if (!role) {
       console.error(`Role '${name}' not found in the database.`);
-      throw new BadRequestException(`Role '${name}' not found`);
+      throw new NotFoundException(`Role '${name}' not found`);
     }
     return role;
   }

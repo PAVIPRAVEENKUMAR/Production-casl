@@ -6,13 +6,13 @@ export type ItemDocument = Item & Document;
 @Schema({ timestamps: true })
 export class Item {
   @Prop({ required: true })
-  name!: string;
+  name: string;
 
   @Prop({ required: true })
-  description?: string;
+  description: string;
 
   @Prop({ required: true })
-  owner!: string;
+  owner: string;
 }
 
 export const ItemSchema = SchemaFactory.createForClass(Item);

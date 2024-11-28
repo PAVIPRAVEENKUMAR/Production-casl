@@ -1,34 +1,25 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
-  IsDefined,
-  IsNotEmpty,
   IsString,
   IsEmail,
   IsOptional,
-  IsBoolean, MinLength,
-  IsEnum
+  IsBoolean, MinLength
 } from 'class-validator';
 
 export class CreateUserDto {
   @ApiProperty()
-  @IsNotEmpty()
-  @IsDefined()
   @IsString()
-  username!: string;
+  username: string;
 
   @ApiProperty()
-  @IsNotEmpty()
-  @IsDefined()
   @IsString()
   @IsEmail()
-  email!: string;
+  email: string;
 
   @ApiProperty()
-  @IsNotEmpty()
-  @IsDefined()
   @IsString()
   @MinLength(8)
-  password!: string;
+  password: string;
 
   @ApiProperty()
   @IsOptional()
@@ -54,16 +45,13 @@ export class UpdateUserDto {
 
 export class Login {
   @ApiProperty()
-  @IsNotEmpty()
-  @IsDefined()
   @IsEmail()
   @IsString()
-  email!: string;
+  email: string;
 
   @ApiProperty()
-  @IsNotEmpty()
-  @IsDefined()
   @IsString()
-  password!: string;
+  @MinLength(8)
+  password: string;
 }
 

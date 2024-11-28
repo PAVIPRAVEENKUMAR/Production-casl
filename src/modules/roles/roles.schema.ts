@@ -7,10 +7,10 @@ export type ClaimDocument = Claim & Document;
 @Schema()
 export class Claim {
   @Prop({ required: true })
-  action!: string;
+  action: string;
 
   @Prop({ required: true })
-  subject!: string;
+  subject: string;
 
   @Prop({ type: Object, default: null })
   conditions?: Record<string, any>;
@@ -19,10 +19,10 @@ export class Claim {
 @Schema()
 export class Role {
   @Prop({ required: true, unique: true })
-  name!: string;
+  name: string;
 
   @Prop({ type: [SchemaFactory.createForClass(Claim)], default: [] })
-  claims!: Claim[];
+  claims: Claim[];
 }
 
 export const RoleSchema = SchemaFactory.createForClass(Role);

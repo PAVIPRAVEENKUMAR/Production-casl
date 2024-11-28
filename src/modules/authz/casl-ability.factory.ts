@@ -11,10 +11,8 @@ export function defineAbilityFor(claims: claim[]): AppAbility {
 
   claims.forEach((claim) => {
     if (claim.conditions) {
-      can(claim.action, claim.subject, claim.conditions);
-    } else {
-      can(claim.action, claim.subject);
-    }
+      can(claim.action, claim.subject, claim.conditions || {});
+    } 
   });
 
   return build({

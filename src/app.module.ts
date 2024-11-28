@@ -6,11 +6,9 @@ import { ItemModule } from './modules/items/items.module';
 import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
-    MongooseModule.forRoot(process.env.MONGO_URI as string),
+  imports:[
+    ConfigModule.forRoot(),
+    MongooseModule.forRoot(process.env.MONGO_URI ||'fallback-mongo-uri'),
     AuthModule,
     UsersModule,
     ItemModule,
